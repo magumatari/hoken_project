@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>保険の相談室｜無料相談・見直し・ライフプラン設計</title>
   <meta name="description" content="保険の相談室は、生命保険・損害保険の無料相談と見直しを行う地域密着の窓口です。複数社から最適なプランを中立的にご提案。オンライン相談も対応。" />
-  <link rel="preload" href="images/hero.jpg" as="image">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preload" href="hoken_hp/img/logo.jpg" as="image">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- ==================== Header（元のイメージにリストア） ==================== -->
+  <!-- ==================== Header / Global Nav ==================== -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#home" aria-label="保険の相談室 トップ">
@@ -17,49 +17,19 @@
         <span class="brand-text">保険の相談室</span>
       </a>
 
-      <!-- モバイルメニュー切替 -->
+      <!-- モバイル用トグル -->
       <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-label="メニューを開閉">
       <label for="nav-toggle" class="nav-toggle-btn" aria-hidden="true">
         <span></span><span></span><span></span>
       </label>
 
-      <!-- 右側：ナビ + SNS（アイコンは小さく調整） -->
       <nav class="global-nav" aria-label="グローバルナビ">
-        <ul class="nav-list">
+        <ul>
           <li><a href="#services">ご相談内容</a></li>
           <li><a href="#flow">ご相談の流れ</a></li>
           <li><a href="#about">私たちについて</a></li>
           <li><a href="#faq">よくある質問</a></li>
           <li><a class="btn btn-primary" href="#contact">無料相談予約</a></li>
-        </ul>
-        <ul class="social-icons" aria-label="ソーシャルリンク">
-          <li>
-            <a href="https://youtube.com/@kakeinosoudanshitu?si=9YKJGdNgNNpX91u4" target="_blank" rel="noopener" aria-label="YouTube">
-              <svg viewBox="0 0 48 48" class="icon-svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="23" class="icon-bg"/>
-                <path d="M34.7 18.7a3.1 3.1 0 0 0-2.2-2.2C30.7 16 24 16 24 16s-6.7 0-8.5.5a3.1 3.1 0 0 0-2.2 2.2C12.8 20.5 12.8 24 12.8 24s0 3.5.5 5.3a3.1 3.1 0 0 0 2.2 2.2C17.3 32 24 32 24 32s6.7 0 8.5-.5a3.1 3.1 0 0 0 2.2-2.2c.5-1.8.5-5.3.5-5.3s0-3.5-.5-5.3zM22 28v-8l6.7 4L22 28z" class="icon-fg"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/kakei_soudan?igsh=YXVrZ2UzdDBlNTk%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 48 48" class="icon-svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="23" class="icon-bg"/>
-                <rect x="16" y="16" width="16" height="16" rx="5" ry="5" class="icon-fg" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="24" cy="24" r="4" class="icon-fg"/>
-                <circle cx="31" cy="17" r="1.6" class="icon-fg"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.tiktok.com/@kakeinosoudanshitu?_t=ZS-8znYajBqQbw&_r=1" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 48 48" class="icon-svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="23" class="icon-bg"/>
-                <path d="M28 16v8.2a5.2 5.2 0 1 1-3.6-1.5" class="icon-fg" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                <path d="M28 16c1.6 2.2 4 3.7 6.8 4.1" class="icon-fg" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-              </svg>
-            </a>
-          </li>
         </ul>
       </nav>
     </div>
@@ -172,7 +142,7 @@
           <span class="flow-num" aria-hidden="true">1</span>
           <div>
             <h3>ご予約</h3>
-            <p>フォームまたはお電話でご希望の日時・方法（来店／訪問／オンライン）をお知らせください。</p>
+            <p>Googleフォームまたはお電話でご希望の日時・方法をお知らせください。</p>
           </div>
         </li>
         <li>
@@ -214,36 +184,23 @@
     </div>
   </section>
 
-  <!-- ==================== Partners（任意。残す場合） ==================== -->
-  <section id="partners" class="section alt">
-    <div class="container">
-      <header class="section-header">
-        <h2>取扱保険会社</h2>
-        <p>一部掲載（50音順）</p>
-      </header>
-      <ul class="partners-list">
-        <li><a href="https://www.rakuten-life.co.jp/" target="_blank" rel="noopener">楽天生命</a></li>
-        <li><a href="https://www.axa.co.jp/" target="_blank" rel="noopener">アクサ生命</a></li>
-        <li><a href="https://www.msa-life.co.jp/" target="_blank" rel="noopener">三井住友海上あいおい生命</a></li>
-        <li><a href="https://www.rakuten-sonpo.co.jp/" target="_blank" rel="noopener">楽天損害保険</a></li>
-      </ul>
-    </div>
-  </section>
-
   <!-- ==================== FAQ ==================== -->
   <section id="faq" class="section alt">
     <div class="container">
       <header class="section-header">
         <h2>よくある質問</h2>
       </header>
+
       <details class="faq">
         <summary>本当に無料ですか？しつこい勧誘はありませんか？</summary>
         <p>相談は何度でも無料です。無理な勧誘は一切いたしません。ご自身のペースでご検討ください。</p>
       </details>
+
       <details class="faq">
         <summary>オンライン相談は可能ですか？</summary>
         <p>はい、可能です。Zoom/Google Meet等に対応しています。資料は画面共有でご説明します。</p>
       </details>
+
       <details class="faq">
         <summary>現在の保険が他社でも見直し相談できますか？</summary>
         <p>可能です。保障の重複や不足を点検し、必要に応じて改善プランをご提案します。</p>
@@ -251,35 +208,13 @@
     </div>
   </section>
 
-  <!-- ==================== Contact + Map（右下：マップ。2カラムで右側へ） ==================== -->
+  <!-- ==================== Contact CTA ==================== -->
   <section id="contact" class="cta">
-    <div class="container cta-grid">
-      <!-- 左：無料相談のご予約 -->
-      <div class="cta-inner">
-        <h2>無料相談のご予約</h2>
-        <p>以下のフォームまたはお電話でお気軽にお問い合わせください。</p>
-        <a class="btn btn-primary btn-lg" href="mailto:info@example.com">メールで予約する</a>
-        <p class="cta-tel">お電話：<a href="tel:0120-000-000">0120-000-000</a>（10:00–18:00／水曜定休）</p>
-      </div>
-
-      <!-- 右：Googleマップ埋め込み（右側固定） -->
-      <div class="cta-map">
-        <div class="map-wrap">
-          <!-- 必要に応じて公式の「共有→地図を埋め込む」のiframeに差し替え可 -->
-          <iframe
-            title="家計の相談室（地図）"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?hl=ja&ll=38.2160519,140.8727542&z=17&q=38.2160519,140.8727542%20(%E5%AE%B6%E8%A8%88%E3%81%AE%E7%9B%B8%E8%AB%87%E5%AE%A4)&output=embed"
-            allowfullscreen>
-          </iframe>
-          <a class="btn btn-ghost open-map"
-             href="https://www.google.com/maps/place/%E5%AE%B6%E8%A8%88%E3%81%AE%E7%9B%B8%E8%AB%87%E5%AE%A4/@38.2160519,140.8727542,17z/data=!3m1!4b1!4m6!3m5!1s0x5f8a29002ab7ee39:0x899d2c6056418818!8m2!3d38.2160519!4d140.8727542!16s%2Fg%2F11y5_jxtxr?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
-             target="_blank" rel="noopener">
-            Googleマップで開く
-          </a>
-        </div>
-      </div>
+    <div class="container cta-inner">
+      <h2>無料相談のご予約</h2>
+      <p>以下のGoogleフォームまたはお電話でお気軽にお問い合わせください。</p>
+      <a class="btn btn-primary btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSf1wpIU1zPPm1rmaLD4mky12yMBhko9YckgWHHrWIDL4wPV-A/viewform?pli=1">Googleフォームで予約する</a>
+      <p class="cta-tel">お電話：<a href="tel:0120-000-000">0120-000-000</a>（10:00–18:00／水曜定休）</p>
     </div>
   </section>
 

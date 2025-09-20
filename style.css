@@ -120,6 +120,53 @@ body{
 .about-visual img{ border-radius: var(--radius); box-shadow: var(--shadow); }
 @media (max-width: 860px){ .about-grid{ grid-template-columns: 1fr; } }
 
+/* ===== Partners（取扱会社） ===== */
+.partner-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 900px){
+  .partner-grid{ grid-template-columns: 1fr; }
+}
+.partner-card{
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+.partner-title{
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.brand-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.brand-list a{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 14px;
+  transition: background var(--speed), transform var(--speed);
+}
+.brand-list a:hover{
+  background: var(--surface);
+  transform: translateY(-1px);
+}
+.brand-list a .ext{ opacity: .5; }
+
 /* ===== Policies（PDF再現の枠＋アコーディオン） ===== */
 .policy-panels{
   display: grid;

@@ -387,3 +387,171 @@ body{
 
 /* 860px以下は既存のハンバーガーメニューが動作するのでそのまま */
 
+/* ===== ① バッジ（中立提案 / オンライン可 / 何度でも無料）の改行防止 ===== */
+/* コンテナは折り返し可（はみ出し防止）、各バッジの中は折り返し禁止 */
+.hero-badges{
+  flex-wrap: wrap;                 /* 画面幅が狭い時は次の行へ回す */
+  gap: 10px;                       /* 余白を少し確保（お好みで） */
+}
+.hero-badges li{
+  white-space: nowrap;             /* バッジ内で改行しない */
+  word-break: keep-all;            /* 日本語の途中改行を禁止 */
+  overflow-wrap: normal;           /* 強制折返しを無効化 */
+  display: inline-flex;            /* 高さが安定して見える */
+  align-items: center;
+}
+
+/* さらに狭い端末では、文字と余白を軽く詰めて1行キープ */
+@media (max-width: 430px){
+  .hero-badges li{
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+/* ===== ② 特徴パネル（青丸）スマホでは縦1列に ===== */
+@media (max-width: 860px){
+  .feature-grid{
+    grid-template-columns: 1fr;    /* 横3→縦3 */
+    gap: 12px;                      /* 少し詰める */
+  }
+  .feature{
+    padding: 14px;                  /* スマホ向けに内側余白を調整 */
+  }
+}
+
+/* ===== Brand chips (取扱会社リンク) ===== */
+:root{
+  /* 公式値が分かればここだけ差し替えればOK（現在は近似色） */
+  --c-rakuten: #bf0000;      /* Rakuten Crimson 近似 */
+  --c-axa:     #003883;      /* AXA Blue 近似 */
+  --c-msalife: #006b5e;      /* MS&AD系グリーン 近似 */
+  --c-rsonpo:  #bf0000;      /* 楽天損保=楽天系の赤 */
+  --c-rmobile: #e6007e;      /* 楽天モバイルのマゼンタ 近似 */
+  --c-iijmio:  #e4007f;      /* IIJmioのマゼンタ 近似 */
+}
+
+.brand-lists{
+  display: grid;
+  gap: 28px;
+}
+.brand-block .brand-ttl{
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.brand-chips{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.brand-chip{
+  --bg:#555; --fg:#fff;
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+.brand-chip:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+.brand-chip:focus-visible{
+  outline: 3px solid rgba(0,0,0,.2);
+  outline-offset: 2px;
+}
+
+/* 色割り当て */
+.brand-chip.rakuten-life   { --bg: var(--c-rakuten); }
+.brand-chip.rakuten-sonpo  { --bg: var(--c-rsonpo); }
+.brand-chip.axa            { --bg: var(--c-axa); }
+.brand-chip.msalife        { --bg: var(--c-msalife); }
+.brand-chip.rakuten-mobile { --bg: var(--c-rmobile); }
+.brand-chip.iijmio         { --bg: var(--c-iijmio); }
+
+/* ダーク背景上でも読みやすく（セクション .alt でもOK） */
+.section.alt .brand-chip{
+  border-color: rgba(0,0,0,.05);
+}
+
+/* スマホで行間が詰まらないように少し広げる */
+@media (max-width: 640px){
+  .brand-chip{ padding: 12px 14px; }
+}
+
+/* ===== Partners / Brands ===== */
+.brand-groups{ display: grid; gap: 26px; }
+.brand-head{ font-size: 18px; margin: 0 0 10px; color: var(--muted); }
+
+.brands-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 1024px){ .brands-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 680px){  .brands-grid{ grid-template-columns: repeat(2, 1fr); } }
+
+.brand-link{
+  --bg: #f3f6fb;           /* fallback */
+  --fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 12px;
+  min-height: 56px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .02em;
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: 0 4px 14px rgba(0,0,0,.06), inset 0 -2px 0 rgba(255,255,255,.15);
+  border: 1px solid rgba(0,0,0,.04);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  will-change: transform;
+}
+.brand-link:focus{ outline: none; }
+.brand-link:focus-visible{
+  box-shadow: 0 6px 18px rgba(0,0,0,.10), 0 0 0 3px rgba(14,122,196,.25);
+}
+
+/* “ポップアップ”ホバー */
+.brand-link:hover,
+.brand-link:active{
+  transform: scale(1.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,.14);
+}
+
+/* 低モーション設定ではアニメ停止 */
+@media (prefers-reduced-motion: reduce){
+  .brand-link{ transition: none; }
+  .brand-link:hover,.brand-link:active{ transform: none; }
+}
+
+/* ===== Brand color tokens (data-brandで切り替え) ===== */
+/* 保険 */
+.brand-link[data-brand="rakuten-life"]      { --bg:#BF0000; }
+.brand-link[data-brand="axa"]               { --bg:#003C71; }
+.brand-link[data-brand="msal"]              { --bg:#006E3A; }
+.brand-link[data-brand="rakuten-sonpo"]     { --bg:#BF0000; }
+
+/* モバイル */
+.brand-link[data-brand="rakuten-mobile"]    { --bg:#E30077; }
+/* IIJmio は楽天との視認性を上げるためブルー系を採用 */
+.brand-link[data-brand="iijmio"]            { --bg:#0068B7; }
+
+/* 視認性のため行高調整（長い社名も崩れにくく） */
+.brand-link{ line-height: 1.3; }

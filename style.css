@@ -44,24 +44,100 @@ body{
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
 }
-.header-inner{ display: flex; align-items: center; min-height: 64px; gap: 12px; }
-.brand{ display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); text-decoration: none; }
-.brand-mark{ width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
-.brand-text{ letter-spacing: .02em; }
+/* --- Brand（ロゴ＋サイト名）のズレ補正 --- */
+.header-inner{
+  align-items: center;      /* ヘッダー内で縦中央 */
+}
 
-/* ==== Header SNS（画像版） ==== */
+/* ロゴ＋テキスト行 */
+.brand{
+  display: inline-flex;
+  align-items: center;      /* 画像と文字を縦中央で合わせる */
+  gap: 8px;
+  line-height: 1;           /* ベースライン余白を消す */
+  white-space: nowrap;      /* 折り返さない（ズレ防止） */
+  flex: 0 0 auto;           /* つぶれ防止 */
+}
+
+/* ロゴ画像：インラインの余白を消すため block 化 */
+.brand-mark{
+  display: block;           /* ←コレが効きます */
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* サイト名の上下が揃うように */
+.brand-text{
+  display: block;
+  font-weight: 700;
+  line-height: 1;           /* 文字の上下余白を最小化 */
+  letter-spacing: .02em;
+}
+
+/* 幅がタイトな時は微調整（任意） */
+@media (max-width: 1120px) and (min-width: 861px){
+  .brand-mark{ width: 26px; height: 26px; }
+  .brand-text{ font-size: 15px; }
+}
+
+/* スマホ時（任意）：ロゴと文字を少し詰める */
+@media (max-width: 860px){
+  .brand-mark{ width: 24px; height: 24px; }
+  .brand-text{ font-size: 15px; }
+}
+
+/* ==== Header SNS（円背景なし／YouTubeのみ角丸） ==== */
 .sns-header{
-  display: inline-flex; align-items: center; gap: 10px;
-  margin: 0 6px 0 8px; padding: 0; list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 6px 0 8px;
+  padding: 0;
+  list-style: none;
 }
+
+/* 背景・枠なしの素のリンクにする */
 .sns-link{
-  width: 45px; height: 45px; border-radius: 50%;
-  background: #fff; display: inline-flex; align-items: center; justify-content: center;
-  text-decoration: none; transition: transform .2s ease, filter .2s ease, opacity .2s ease;
-  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
-.sns-img{ width: 60%; height: auto; display: block; }
-.sns-link:hover{ transform: translateY(-1px); filter: brightness(1.08); }
+
+/* アイコン画像：透過PNG/SVGならそのまま背景が抜けます */
+.sns-img{
+  width: 28px;
+  height: 28px;
+  display: block;
+  object-fit: contain;   /* 比率維持で収める */
+  background: transparent;
+  /* 以前の丸背景や枠を無効化 */
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* YouTubeだけ、角丸の四角に（元画像が真四角でも自然に） */
+.sns-img.youtube{
+  border-radius: 6px;
+}
+
+/* さりげないホバー演出 */
+.sns-link:hover .sns-img{
+  transform: translateY(-1px);
+  transition: transform .2s ease;
+}
+
+/* スマホは少し小さく */
+@media (max-width: 860px){
+  .sns-header{ gap: 10px; margin-left: 6px; }
+  .sns-img{ width: 22px; height: 22px; }
+}
+
 
 /* ===== Nav ===== */
 .global-nav{ margin-left: auto; }
@@ -283,3 +359,30 @@ body{
   .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
   .nav-toggle:checked ~ .global-nav{ transform: translateY(0%); }
 }
+
+/* --- Headerナビの改行防止＆崩れ対策 --- */
+.global-nav ul{
+  flex-wrap: nowrap;          /* UL自体は折り返さない */
+  gap: 12px;                  /* すこし詰めて幅を確保 */
+}
+.global-nav li{
+  flex: 0 0 auto;             /* 各項目を縮ませすぎない（改行回避） */
+}
+.global-nav a{
+  white-space: nowrap;        /* 1項目を1行に固定 */
+  word-break: keep-all;       /* 日本語の文字ごとの改行を禁止 */
+}
+
+/* 予約ボタンは縮小させない（はみ出し防止） */
+.global-nav .btn{
+  flex-shrink: 0;
+}
+
+/* 幅が狭くなってきた時の調整（PCレイアウト域） */
+@media (max-width: 1120px) and (min-width: 861px){
+  .sns-img{ width: 24px; height: 24px; }     /* アイコン少し小さく */
+  .global-nav ul{ gap: 8px; }
+  .global-nav a{ padding: 6px 8px; font-size: 14px; }
+}
+
+/* 860px以下は既存のハンバーガーメニューが動作するのでそのまま */

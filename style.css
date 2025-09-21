@@ -295,3 +295,39 @@ body{
     color: var(--muted);
   }
 }
+
+/* === モバイル版：横スライドせず1行に収める === */
+@media (max-width: 640px) {
+  /* セクションタイトルをスライドなしで中央表示 */
+  #policies .section-header h2 {
+    white-space: normal;           /* 折り返しOKに変更 */
+    overflow: visible;             /* はみ出し部分を隠さない */
+    text-align: center;
+    font-size: clamp(18px, 5vw, 24px);
+    margin: 0 auto 8px;
+  }
+
+  /* 説明文「クリックで開き、全文をご確認いただけます」 */
+  #policies .section-header p {
+    white-space: nowrap;           /* 折り返しなし */
+    text-align: center;
+    font-size: 14px;
+    margin: 0 auto 16px;
+  }
+
+  /* summary部分のレイアウト調整 */
+  .policy-head {
+    grid-template-columns: 1fr;    /* 縦並びにする */
+    text-align: center;
+    row-gap: 4px;
+  }
+  .policy-head .policy-title {
+    display: block;
+    font-weight: 700;
+  }
+  .policy-head .policy-sub {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+  }
+}

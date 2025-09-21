@@ -266,3 +266,32 @@ body{
 .brand-foot .brand-mark{ background: #fff; }
 .copy{ text-align: center; color: #8e98a7; border-top: 1px solid #212631; margin-top: 18px; padding: 12px 0 22px; }
 @media (max-width: 900px){ .footer-grid{ grid-template-columns: 1fr; } }
+
+/* === Policies 見出し：モバイルは折り返し不可（横スクロール可） === */
+@media (max-width: 640px){
+  #policies .section-header h2{
+    white-space: nowrap;          /* 折り返しなし */
+    overflow-x: auto;             /* はみ出たら横スクロール */
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    margin-inline: auto;          /* 中央配置のまま */
+  }
+}
+
+/* === details のサマリー：モバイルは縦2行表示にする === */
+@media (max-width: 640px){
+  .policy-head{
+    grid-template-columns: 1fr;   /* 1列レイアウト */
+    row-gap: 4px;
+    text-align: left;
+  }
+  .policy-head .policy-title{
+    display: block;               /* 1行目：タイトル */
+    font-weight: 700;
+  }
+  .policy-head .policy-sub{
+    display: block;               /* 2行目：サブタイトル */
+    font-size: 14px;
+    color: var(--muted);
+  }
+}

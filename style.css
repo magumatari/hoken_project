@@ -581,3 +581,32 @@ body{
     margin-bottom: 0;             /* 最後の項目は余白を詰める */
   }
 }
+
+/* === Policies ＞ (6) 当店に対するご照会：モバイル再調整（枠ナシ＋住所は折り返し不可） === */
+@media (max-width: 640px){
+  /* 2カラム→1カラム（レイアウトは維持） */
+  .policy-box .def{
+    grid-template-columns: 1fr;
+    gap: 4px 0;
+  }
+  .policy-box .def dt{
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  /* 枠・背景・余白を消す（=素のテキスト表示） */
+  .policy-box .def dd{
+    margin: 0 0 10px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+  /* 2つ目のdd（住所）だけ折り返し不可。長い場合は横スクロールで見られるように */
+  .policy-box .def dd:nth-of-type(2){
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

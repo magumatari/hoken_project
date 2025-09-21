@@ -555,3 +555,29 @@ body{
 
 /* 視認性のため行高調整（長い社名も崩れにくく） */
 .brand-link{ line-height: 1.3; }
+
+/* ===== Policies ＞ (6) 当店に対するご照会 の定義リスト：モバイル最適化 ===== */
+@media (max-width: 640px){
+  /* 2カラム→1カラム（見出しの下に内容をフル幅で表示） */
+  .policy-box .def{
+    grid-template-columns: 1fr;   /* ラベルの下に値を縦積み */
+    gap: 4px 0;
+  }
+  .policy-box .def dt{
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 10px;             /* 各項目の区切り感を出す */
+  }
+  .policy-box .def dd{
+    margin: 0 0 10px;             /* 下だけ余白 */
+    padding: 10px 12px;           /* 囲み内の読みやすい余白 */
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    word-break: break-word;       /* 数字や英字が長くてもはみ出さない */
+    overflow-wrap: anywhere;      /* どこでも改行して収める */
+  }
+  .policy-box .def dd:last-of-type{
+    margin-bottom: 0;             /* 最後の項目は余白を詰める */
+  }
+}

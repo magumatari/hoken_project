@@ -12,7 +12,7 @@ h1, h2, h3, p { margin: 0 0 .6rem; }
   --bg: #ffffff;
   --ink: #14161a;
   --muted: #5f6672;
-  --brand: #ec6b2d;     /* 温かいオレンジ */
+  --brand: #ec6b2d;
   --brand-ink: #ffffff;
   --surface: #f6f8fb;
   --border: #e5e8ee;
@@ -24,6 +24,7 @@ h1, h2, h3, p { margin: 0 0 .6rem; }
   --lead: clamp(18px, 2vw, 20px);
 }
 
+/* ===== Base ===== */
 body{
   background: var(--bg);
   color: var(--ink);
@@ -37,6 +38,17 @@ body{
 .section-header{ text-align: center; margin-bottom: 32px; }
 .section-header h2{ font-size: clamp(24px, 2.8vw, 32px); margin-bottom: .2rem; }
 
+/* スマホ時：Policies セクション見出しは折り返さず横スクロールで崩れ防止 */
+@media (max-width: 640px){
+  #policies .section-header h2{
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+}
+
 /* ===== Header ===== */
 .site-header{
   position: sticky; top: 0; z-index: 100;
@@ -44,105 +56,39 @@ body{
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
 }
-/* --- Brand（ロゴ＋サイト名）のズレ補正 --- */
-.header-inner{
-  align-items: center;      /* ヘッダー内で縦中央 */
-}
+.header-inner{ display: flex; align-items: center; min-height: 64px; gap: 12px; }
 
-/* ロゴ＋テキスト行 */
+/* Brand（ロゴ＋サイト名） */
 .brand{
-  display: inline-flex;
-  align-items: center;      /* 画像と文字を縦中央で合わせる */
-  gap: 8px;
-  line-height: 1;           /* ベースライン余白を消す */
-  white-space: nowrap;      /* 折り返さない（ズレ防止） */
-  flex: 0 0 auto;           /* つぶれ防止 */
+  display: inline-flex; align-items: center; gap: 8px;
+  line-height: 1; white-space: nowrap; flex: 0 0 auto;
+  font-weight: 700; color: var(--ink); text-decoration: none;
 }
-
-/* ロゴ画像：インラインの余白を消すため block 化 */
-.brand-mark{
-  display: block;           /* ←コレが効きます */
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-/* サイト名の上下が揃うように */
-.brand-text{
-  display: block;
-  font-weight: 700;
-  line-height: 1;           /* 文字の上下余白を最小化 */
-  letter-spacing: .02em;
-}
-
-/* 幅がタイトな時は微調整（任意） */
+.brand-mark{ display: block; width: 30px; height: 30px; object-fit: cover; border-radius: 50%; }
+.brand-text{ display: block; line-height: 1; letter-spacing: .02em; }
 @media (max-width: 1120px) and (min-width: 861px){
-  .brand-mark{ width: 26px; height: 26px; }
-  .brand-text{ font-size: 15px; }
+  .brand-mark{ width: 26px; height: 26px; } .brand-text{ font-size: 15px; }
 }
-
-/* スマホ時（任意）：ロゴと文字を少し詰める */
 @media (max-width: 860px){
-  .brand-mark{ width: 24px; height: 24px; }
-  .brand-text{ font-size: 15px; }
+  .brand-mark{ width: 24px; height: 24px; } .brand-text{ font-size: 15px; }
 }
 
-/* ==== Header SNS（円背景なし／YouTubeのみ角丸） ==== */
-.sns-header{
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 6px 0 8px;
-  padding: 0;
-  list-style: none;
-}
-
-/* 背景・枠なしの素のリンクにする */
-.sns-link{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  background: transparent;
-  border: 0;
-  padding: 0;
-}
-
-/* アイコン画像：透過PNG/SVGならそのまま背景が抜けます */
-.sns-img{
-  width: 28px;
-  height: 28px;
-  display: block;
-  object-fit: contain;   /* 比率維持で収める */
-  background: transparent;
-  /* 以前の丸背景や枠を無効化 */
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* YouTubeだけ、角丸の四角に（元画像が真四角でも自然に） */
-.sns-img.youtube{
-  border-radius: 6px;
-}
-
-/* さりげないホバー演出 */
-.sns-link:hover .sns-img{
-  transform: translateY(-1px);
-  transition: transform .2s ease;
-}
-
-/* スマホは少し小さく */
+/* Header SNS（円背景なし／YouTubeのみ角丸） */
+.sns-header{ display: inline-flex; align-items: center; gap: 12px; margin: 0 6px 0 8px; padding: 0; list-style: none; }
+.sns-link{ display: inline-flex; align-items: center; justify-content: center; line-height: 1; background: transparent; border: 0; padding: 0; }
+.sns-img{ width: 28px; height: 28px; display: block; object-fit: contain; background: transparent; border-radius: 0; box-shadow: none; }
+.sns-img.youtube{ border-radius: 6px; }
+.sns-link:hover .sns-img{ transform: translateY(-1px); transition: transform .2s ease; }
 @media (max-width: 860px){
   .sns-header{ gap: 10px; margin-left: 6px; }
   .sns-img{ width: 22px; height: 22px; }
 }
 
-
 /* ===== Nav ===== */
 .global-nav{ margin-left: auto; }
-.global-nav ul{ display: flex; gap: 16px; align-items: center; list-style: none; padding: 0; margin: 0; }
-.global-nav a{ text-decoration: none; color: var(--ink); padding: 8px 10px; border-radius: 8px; transition: background var(--speed); }
+.global-nav ul{ display: flex; gap: 16px; align-items: center; list-style: none; padding: 0; margin: 0; flex-wrap: nowrap; }
+.global-nav li{ flex: 0 0 auto; }
+.global-nav a{ text-decoration: none; color: var(--ink); padding: 8px 10px; border-radius: 8px; transition: background var(--speed); white-space: nowrap; word-break: keep-all; }
 .global-nav a:hover{ background: var(--surface); }
 .btn{ display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: 10px 16px; }
 .btn-primary{ background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
@@ -150,10 +96,27 @@ body{
 .btn-ghost{ background: transparent; color: var(--ink); }
 .btn-lg{ padding: 14px 22px; font-weight: 700; }
 
-/* モバイルナビ */
+/* モバイルナビ（ハンバーガー） */
 .nav-toggle{ display: none; }
 .nav-toggle-btn{ display: none; cursor: pointer; }
 .nav-toggle-btn span{ display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; transition: transform var(--speed); }
+@media (max-width: 860px){
+  .nav-toggle-btn{ display: inline-block; margin-left: auto; }
+  .global-nav{
+    position: fixed; left: 0; right: 0; top: 64px; background: #fff; border-bottom: 1px solid var(--border);
+    transform: translateY(-120%); transition: transform var(--speed); padding: 12px 16px;
+  }
+  .global-nav ul{ flex-direction: column; align-items: flex-start; gap: 8px; }
+  .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(2){ opacity: 0; }
+  .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+  .nav-toggle:checked ~ .global-nav{ transform: translateY(0%); }
+}
+@media (max-width: 1120px) and (min-width: 861px){
+  .sns-img{ width: 24px; height: 24px; }
+  .global-nav ul{ gap: 8px; }
+  .global-nav a{ padding: 6px 8px; font-size: 14px; }
+}
 
 /* ===== Hero ===== */
 .hero{ background: linear-gradient(180deg, rgba(236,107,45,.08), transparent 60%); }
@@ -161,9 +124,10 @@ body{
 .hero-copy h1{ font-size: clamp(28px, 3.6vw, 42px); line-height: 1.25; margin-bottom: 12px; }
 .lead{ font-size: var(--lead); color: var(--muted); }
 .hero-cta{ display: flex; gap: 12px; margin: 16px 0 10px; }
-.hero-badges{ display: flex; gap: 10px; padding-left: 0; list-style: none; color: var(--muted); }
-.hero-badges li{ border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; background: #fff; }
+.hero-badges{ display: flex; gap: 10px; padding-left: 0; list-style: none; color: var(--muted); flex-wrap: wrap; }
+.hero-badges li{ border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; background: #fff; white-space: nowrap; word-break: keep-all; overflow-wrap: normal; display: inline-flex; align-items: center; }
 .hero-visual img{ border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover; width: 100%; height: 100%; min-height: 240px; }
+@media (max-width: 430px){ .hero-badges li{ padding: 6px 12px; font-size: 14px; } }
 @media (max-width: 860px){ .hero-inner{ grid-template-columns: 1fr; padding-top: 24px; } }
 
 /* ===== Cards ===== */
@@ -182,6 +146,10 @@ body{
 .feature-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .feature{ background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
 .feature h3{ font-size: 16px; margin-bottom: 4px; }
+@media (max-width: 860px){
+  .feature-grid{ grid-template-columns: 1fr; gap: 12px; }
+  .feature{ padding: 14px; }
+}
 
 /* ===== Flow ===== */
 .flow{ list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
@@ -197,80 +165,51 @@ body{
 @media (max-width: 860px){ .about-grid{ grid-template-columns: 1fr; } }
 
 /* ===== Partners（取扱会社） ===== */
-.partner-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-@media (max-width: 900px){
-  .partner-grid{ grid-template-columns: 1fr; }
-}
-.partner-card{
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
-}
-.partner-title{
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-.brand-list{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 10px;
-}
-.brand-list a{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 10px 14px;
-  transition: background var(--speed), transform var(--speed);
-}
-.brand-list a:hover{
-  background: var(--surface);
-  transform: translateY(-1px);
-}
-.brand-list a .ext{ opacity: .5; }
+.brand-groups{ display: grid; gap: 26px; }
+.brand-head{ font-size: 18px; margin: 0 0 10px; color: var(--muted); }
+.brands-grid{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1024px){ .brands-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 680px){  .brands-grid{ grid-template-columns: repeat(2, 1fr); } }
 
-/* ===== Policies（PDF再現の枠＋アコーディオン） ===== */
-.policy-panels{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+/* 取扱会社ボタン */
+.brand-link{
+  --bg: #f3f6fb; --fg: #fff;
+  display: inline-flex; align-items: center; justify-content: center; text-align: center;
+  padding: 14px 12px; min-height: 56px; border-radius: 14px; text-decoration: none;
+  font-weight: 700; letter-spacing: .02em; line-height: 1.3;
+  background: var(--bg); color: var(--fg);
+  box-shadow: 0 4px 14px rgba(0,0,0,.06), inset 0 -2px 0 rgba(255,255,255,.15);
+  border: 1px solid rgba(0,0,0,.04);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  will-change: transform;
 }
-@media (max-width: 960px){
-  .policy-panels{ grid-template-columns: 1fr; }
+.brand-link:focus{ outline: none; }
+.brand-link:focus-visible{ box-shadow: 0 6px 18px rgba(0,0,0,.10), 0 0 0 3px rgba(14,122,196,.25); }
+.brand-link:hover, .brand-link:active{ transform: scale(1.06); box-shadow: 0 10px 24px rgba(0,0,0,.14); }
+@media (prefers-reduced-motion: reduce){
+  .brand-link{ transition: none; } .brand-link:hover,.brand-link:active{ transform: none; }
 }
-.policy-card{
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
+/* Brand color (data-brand) */
+.brand-link[data-brand="rakuten-life"]  { --bg:#BF0000; }
+.brand-link[data-brand="axa"]           { --bg:#003C71; }
+.brand-link[data-brand="msal"]          { --bg:#006E3A; }
+.brand-link[data-brand="rakuten-sonpo"] { --bg:#BF0000; }
+.brand-link[data-brand="rakuten-mobile"]{ --bg:#E30077; }
+.brand-link[data-brand="iijmio"]        { --bg:#0068B7; }
+
+/* ===== Policies（PDF再現＋アコーディオン） ===== */
+.policy-panels{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 960px){ .policy-panels{ grid-template-columns: 1fr; } }
+
+.policy-card{ background: #fff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.policy-card > summary::-webkit-details-marker{ display:none; }
+
 .policy-head{
-  list-style: none;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 16px;
-  background: linear-gradient(180deg, #fafbfe, #f0f3f9);
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px;
+  padding: 14px 16px; background: linear-gradient(180deg, #fafbfe, #f0f3f9);
   border-bottom: 1px solid var(--border);
 }
-.policy-card > summary::-webkit-details-marker{ display:none; }
 .policy-title{ font-weight: 700; }
 .policy-sub{ color: var(--muted); font-size: 14px; }
 .policy-card[open] .policy-head{ background: #fff; }
@@ -280,21 +219,25 @@ body{
 .policy-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
 @media (max-width: 640px){ .policy-grid{ grid-template-columns: 1fr; } }
 
-.policy-box{
-  border: 2px solid #cfd6e6;
-  border-radius: var(--radius-sm);
-  padding: 12px;
-  background: #fff;
+/* モバイル：summary を2行レイアウト（タイトル→サブタイトル） */
+@media (max-width: 640px){
+  .policy-head{ grid-template-columns: 1fr; row-gap: 4px; text-align: left; }
+  .policy-head .policy-title{ display:block; }
+  .policy-head .policy-sub{ display:block; font-size: 14px; color: var(--muted); }
 }
-.box-title{
-  font-weight: 700; font-size: 15px;
-  margin-bottom: .3rem;
-  padding-bottom: .2rem;
-  border-bottom: 1px dashed #cfd6e6;
+
+/* (6) 当店に対するご照会：定義リストのモバイル最適化（枠なし／住所は折返し不可） */
+@media (max-width: 640px){
+  .policy-box .def{ grid-template-columns: 1fr; gap: 4px 0; }
+  .policy-box .def dt{ font-weight: 700; color: var(--muted); margin-top: 10px; }
+  .policy-box .def dd{
+    margin: 0 0 10px; padding: 0; border: 0; background: transparent;
+    word-break: normal; overflow-wrap: normal;
+  }
+  .policy-box .def dd:nth-of-type(2){ /* 住所 */
+    white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
 }
-.def{ display: grid; grid-template-columns: 10em 1fr; gap: 6px 10px; margin: .2rem 0; }
-.def dt{ color: var(--muted); }
-.def dd{ margin: 0; }
 
 /* ===== FAQ ===== */
 .faq{ background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin: 10px 0; box-shadow: var(--shadow); }
@@ -304,29 +247,13 @@ body{
 /* ===== CTA（右下にマップ固定） ===== */
 .cta{ background: radial-gradient(1200px 400px at 20% -10%, rgba(236,107,45,.25), transparent 40%), var(--ink); color: #fff; }
 .cta-grid{ display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: stretch; padding: 40px 0; }
-.cta-inner{
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: var(--radius);
-  padding: 24px;
-}
+.cta-inner{ background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 24px; }
 .cta .btn-primary{ background: #fff; color: var(--ink); border-color: #fff; }
 .cta .btn-primary:hover{ filter: brightness(.98); }
 .cta-tel a{ color: #fff; text-decoration: underline; }
-
-.cta-map .map-wrap{
-  position: relative; height: 100%; min-height: 280px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
+.cta-map .map-wrap{ position: relative; height: 100%; min-height: 280px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); overflow: hidden; }
 .cta-map iframe{ width: 100%; height: 100%; min-height: 280px; border: 0; display: block; filter: saturate(1.05) contrast(1.05); }
-.open-map{
-  position: absolute; right: 12px; bottom: 12px;
-  padding: 8px 12px; border-radius: 999px; background: #fff; color: var(--ink);
-  text-decoration: none; border: 1px solid var(--border);
-}
+.open-map{ position: absolute; right: 12px; bottom: 12px; padding: 8px 12px; border-radius: 999px; background: #fff; color: var(--ink); text-decoration: none; border: 1px solid var(--border); }
 .open-map:hover{ filter: brightness(.96); }
 @media (max-width: 900px){ .cta-grid{ grid-template-columns: 1fr; } }
 
@@ -339,274 +266,3 @@ body{
 .brand-foot .brand-mark{ background: #fff; }
 .copy{ text-align: center; color: #8e98a7; border-top: 1px solid #212631; margin-top: 18px; padding: 12px 0 22px; }
 @media (max-width: 900px){ .footer-grid{ grid-template-columns: 1fr; } }
-
-/* ==================== Responsive Nav ==================== */
-@media (max-width: 860px){
-  .sns-header{ gap: 8px; margin-left: 6px; }
-  .sns-link{ width: 36px; height: 36px; }
-  .sns-img{ width: 62%; }
-
-  .nav-toggle-btn{ display: inline-block; margin-left: auto; }
-  .global-nav{
-    position: fixed; left: 0; right: 0; top: 64px; background: #fff;
-    border-bottom: 1px solid var(--border);
-    transform: translateY(-120%); transition: transform var(--speed);
-    padding: 12px 16px;
-  }
-  .global-nav ul{ flex-direction: column; align-items: flex-start; gap: 8px; }
-  .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
-  .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(2){ opacity: 0; }
-  .nav-toggle:checked ~ .nav-toggle-btn span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
-  .nav-toggle:checked ~ .global-nav{ transform: translateY(0%); }
-}
-
-/* --- Headerナビの改行防止＆崩れ対策 --- */
-.global-nav ul{
-  flex-wrap: nowrap;          /* UL自体は折り返さない */
-  gap: 12px;                  /* すこし詰めて幅を確保 */
-}
-.global-nav li{
-  flex: 0 0 auto;             /* 各項目を縮ませすぎない（改行回避） */
-}
-.global-nav a{
-  white-space: nowrap;        /* 1項目を1行に固定 */
-  word-break: keep-all;       /* 日本語の文字ごとの改行を禁止 */
-}
-
-/* 予約ボタンは縮小させない（はみ出し防止） */
-.global-nav .btn{
-  flex-shrink: 0;
-}
-
-/* 幅が狭くなってきた時の調整（PCレイアウト域） */
-@media (max-width: 1120px) and (min-width: 861px){
-  .sns-img{ width: 24px; height: 24px; }     /* アイコン少し小さく */
-  .global-nav ul{ gap: 8px; }
-  .global-nav a{ padding: 6px 8px; font-size: 14px; }
-}
-
-/* 860px以下は既存のハンバーガーメニューが動作するのでそのまま */
-
-/* ===== ① バッジ（中立提案 / オンライン可 / 何度でも無料）の改行防止 ===== */
-/* コンテナは折り返し可（はみ出し防止）、各バッジの中は折り返し禁止 */
-.hero-badges{
-  flex-wrap: wrap;                 /* 画面幅が狭い時は次の行へ回す */
-  gap: 10px;                       /* 余白を少し確保（お好みで） */
-}
-.hero-badges li{
-  white-space: nowrap;             /* バッジ内で改行しない */
-  word-break: keep-all;            /* 日本語の途中改行を禁止 */
-  overflow-wrap: normal;           /* 強制折返しを無効化 */
-  display: inline-flex;            /* 高さが安定して見える */
-  align-items: center;
-}
-
-/* さらに狭い端末では、文字と余白を軽く詰めて1行キープ */
-@media (max-width: 430px){
-  .hero-badges li{
-    padding: 6px 12px;
-    font-size: 14px;
-  }
-}
-
-/* ===== ② 特徴パネル（青丸）スマホでは縦1列に ===== */
-@media (max-width: 860px){
-  .feature-grid{
-    grid-template-columns: 1fr;    /* 横3→縦3 */
-    gap: 12px;                      /* 少し詰める */
-  }
-  .feature{
-    padding: 14px;                  /* スマホ向けに内側余白を調整 */
-  }
-}
-
-/* ===== Brand chips (取扱会社リンク) ===== */
-:root{
-  /* 公式値が分かればここだけ差し替えればOK（現在は近似色） */
-  --c-rakuten: #bf0000;      /* Rakuten Crimson 近似 */
-  --c-axa:     #003883;      /* AXA Blue 近似 */
-  --c-msalife: #006b5e;      /* MS&AD系グリーン 近似 */
-  --c-rsonpo:  #bf0000;      /* 楽天損保=楽天系の赤 */
-  --c-rmobile: #e6007e;      /* 楽天モバイルのマゼンタ 近似 */
-  --c-iijmio:  #e4007f;      /* IIJmioのマゼンタ 近似 */
-}
-
-.brand-lists{
-  display: grid;
-  gap: 28px;
-}
-.brand-block .brand-ttl{
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-.brand-chips{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.brand-chip{
-  --bg:#555; --fg:#fff;
-  display: inline-flex;
-  align-items: center;
-  gap: .5em;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: var(--bg);
-  color: var(--fg);
-  text-decoration: none;
-  font-weight: 700;
-  line-height: 1;
-  border: 1px solid rgba(0,0,0,.06);
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
-  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
-}
-.brand-chip:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-  box-shadow: 0 6px 18px rgba(0,0,0,.12);
-}
-.brand-chip:focus-visible{
-  outline: 3px solid rgba(0,0,0,.2);
-  outline-offset: 2px;
-}
-
-/* 色割り当て */
-.brand-chip.rakuten-life   { --bg: var(--c-rakuten); }
-.brand-chip.rakuten-sonpo  { --bg: var(--c-rsonpo); }
-.brand-chip.axa            { --bg: var(--c-axa); }
-.brand-chip.msalife        { --bg: var(--c-msalife); }
-.brand-chip.rakuten-mobile { --bg: var(--c-rmobile); }
-.brand-chip.iijmio         { --bg: var(--c-iijmio); }
-
-/* ダーク背景上でも読みやすく（セクション .alt でもOK） */
-.section.alt .brand-chip{
-  border-color: rgba(0,0,0,.05);
-}
-
-/* スマホで行間が詰まらないように少し広げる */
-@media (max-width: 640px){
-  .brand-chip{ padding: 12px 14px; }
-}
-
-/* ===== Partners / Brands ===== */
-.brand-groups{ display: grid; gap: 26px; }
-.brand-head{ font-size: 18px; margin: 0 0 10px; color: var(--muted); }
-
-.brands-grid{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-@media (max-width: 1024px){ .brands-grid{ grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 680px){  .brands-grid{ grid-template-columns: repeat(2, 1fr); } }
-
-.brand-link{
-  --bg: #f3f6fb;           /* fallback */
-  --fg: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 14px 12px;
-  min-height: 56px;
-  border-radius: 14px;
-  text-decoration: none;
-  font-weight: 700;
-  letter-spacing: .02em;
-  background: var(--bg);
-  color: var(--fg);
-  box-shadow: 0 4px 14px rgba(0,0,0,.06), inset 0 -2px 0 rgba(255,255,255,.15);
-  border: 1px solid rgba(0,0,0,.04);
-  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-  will-change: transform;
-}
-.brand-link:focus{ outline: none; }
-.brand-link:focus-visible{
-  box-shadow: 0 6px 18px rgba(0,0,0,.10), 0 0 0 3px rgba(14,122,196,.25);
-}
-
-/* “ポップアップ”ホバー */
-.brand-link:hover,
-.brand-link:active{
-  transform: scale(1.06);
-  box-shadow: 0 10px 24px rgba(0,0,0,.14);
-}
-
-/* 低モーション設定ではアニメ停止 */
-@media (prefers-reduced-motion: reduce){
-  .brand-link{ transition: none; }
-  .brand-link:hover,.brand-link:active{ transform: none; }
-}
-
-/* ===== Brand color tokens (data-brandで切り替え) ===== */
-/* 保険 */
-.brand-link[data-brand="rakuten-life"]      { --bg:#BF0000; }
-.brand-link[data-brand="axa"]               { --bg:#003C71; }
-.brand-link[data-brand="msal"]              { --bg:#006E3A; }
-.brand-link[data-brand="rakuten-sonpo"]     { --bg:#BF0000; }
-
-/* モバイル */
-.brand-link[data-brand="rakuten-mobile"]    { --bg:#E30077; }
-/* IIJmio は楽天との視認性を上げるためブルー系を採用 */
-.brand-link[data-brand="iijmio"]            { --bg:#0068B7; }
-
-/* 視認性のため行高調整（長い社名も崩れにくく） */
-.brand-link{ line-height: 1.3; }
-
-/* ===== Policies ＞ (6) 当店に対するご照会 の定義リスト：モバイル最適化 ===== */
-@media (max-width: 640px){
-  /* 2カラム→1カラム（見出しの下に内容をフル幅で表示） */
-  .policy-box .def{
-    grid-template-columns: 1fr;   /* ラベルの下に値を縦積み */
-    gap: 4px 0;
-  }
-  .policy-box .def dt{
-    font-weight: 700;
-    color: var(--muted);
-    margin-top: 10px;             /* 各項目の区切り感を出す */
-  }
-  .policy-box .def dd{
-    margin: 0 0 10px;             /* 下だけ余白 */
-    padding: 10px 12px;           /* 囲み内の読みやすい余白 */
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    background: #fff;
-    word-break: break-word;       /* 数字や英字が長くてもはみ出さない */
-    overflow-wrap: anywhere;      /* どこでも改行して収める */
-  }
-  .policy-box .def dd:last-of-type{
-    margin-bottom: 0;             /* 最後の項目は余白を詰める */
-  }
-}
-
-/* === Policies ＞ (6) 当店に対するご照会：モバイル再調整（枠ナシ＋住所は折り返し不可） === */
-@media (max-width: 640px){
-  /* 2カラム→1カラム（レイアウトは維持） */
-  .policy-box .def{
-    grid-template-columns: 1fr;
-    gap: 4px 0;
-  }
-  .policy-box .def dt{
-    font-weight: 700;
-    color: var(--muted);
-    margin-top: 10px;
-  }
-  /* 枠・背景・余白を消す（=素のテキスト表示） */
-  .policy-box .def dd{
-    margin: 0 0 10px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    word-break: normal;
-    overflow-wrap: normal;
-  }
-  /* 2つ目のdd（住所）だけ折り返し不可。長い場合は横スクロールで見られるように */
-  .policy-box .def dd:nth-of-type(2){
-    white-space: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}

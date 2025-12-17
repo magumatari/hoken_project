@@ -331,3 +331,73 @@ body{
     color: var(--muted);
   }
 }
+
+/* policy-gridの子が1個しかないなら1列にする */
+.policy-grid:has(> .policy-box:only-child){
+  grid-template-columns: 1fr;
+}
+.policy-grid:has(> .policy-box:only-child) > .policy-box{
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 861px){
+  .hero-copy h1{
+    white-space: nowrap;                 /* 折り返し禁止 */
+    font-size: clamp(26px, 2.8vw, 38px); /* 上限を少し下げて収まりやすく */
+  }
+}
+
+/* ===== Footer spacing fix（上下余白を均等に） ===== */
+.site-footer{
+  padding-block: 28px;      /* 上下を同じに */
+  padding-top: 28px;        /* 既存と整合（消してもOK） */
+}
+
+.footer-grid{
+  align-items: start;
+}
+
+.brand-foot{
+  margin-bottom: 10px;
+}
+
+/* addressの余計な余白をリセットして整列 */
+.site-footer address{
+  margin: 0;
+  font-style: normal;
+  line-height: 1.8;
+}
+
+/* コピー行の余白を整える（余計なmargin/paddingを減らす） */
+.copy{
+  margin-top: 20px;         /* ここで下の区切りを作る */
+  padding: 14px 0;          /* 上下を均一に */
+}
+
+.brand-title{
+  color:#cbd1dc;
+}
+
+/* ===== About（PC：文章の下に画像を置く） ===== */
+@media (min-width: 861px){
+  .about-grid{
+    grid-template-columns: 1fr;   /* 2カラム→1カラム */
+  }
+}
+
+@media (min-width: 861px){
+  .about-visual{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2枚横並び */
+    gap: 16px;                                        /* 写真の間隔 */
+    margin-top: 16px;                                 /* 文章との間隔 */
+  }
+
+  .about-visual img{
+    width: 100%;
+    height: auto;        /* 好みで調整（autoでもOK） */
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+}

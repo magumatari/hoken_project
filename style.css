@@ -401,3 +401,13 @@ body{
     box-shadow: var(--shadow);
   }
 }
+
+/* ===== About（モバイル：画像を縦並び＋間隔を空ける） ===== */
+@media (max-width: 860px){
+  .about-visual{
+    display: grid;
+    grid-template-columns: 1fr; /* 縦1列 */
+    gap: 16px;                  /* ←ここが縦のスペース */
+    margin-top: 16px;           /* 文章との間隔 */
+  }
+}
